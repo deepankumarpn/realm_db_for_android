@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/insertActivity">
+
+    <fragment
+        android:id="@+id/mainActivity"
+        android:name="dev.spooke.realmdb.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" >
+        <action
+            android:id="@+id/action_mainActivity_to_insertActivity"
+            app:destination="@id/insertActivity" />
+        <action
+            android:id="@+id/action_mainActivity_to_deleteActivity"
+            app:destination="@id/deleteActivity" />
+        <action
+            android:id="@+id/action_mainActivity_to_updateActivity"
+            app:destination="@id/updateActivity" />
+        <action
+            android:id="@+id/action_mainActivity_to_viewActivity4"
+            app:destination="@id/viewActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertActivity"
+        android:name="dev.spooke.realmdb.InsertActivity"
+        android:label="activity_insert"
+        tools:layout="@layout/activity_insert" />
+    <fragment
+        android:id="@+id/deleteActivity"
+        android:name="dev.spooke.realmdb.DeleteActivity"
+        android:label="activity_delete"
+        tools:layout="@layout/activity_delete" />
+    <fragment
+        android:id="@+id/updateActivity"
+        android:name="dev.spooke.realmdb.UpdateActivity"
+        android:label="activity_update"
+        tools:layout="@layout/activity_update" />
+    <fragment
+        android:id="@+id/viewActivity"
+        android:name="dev.spooke.realmdb.ViewActivity"
+        android:label="activity_view"
+        tools:layout="@layout/activity_view" />
+</navigation>
