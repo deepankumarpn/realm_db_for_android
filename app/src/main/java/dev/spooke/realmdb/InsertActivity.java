@@ -45,12 +45,20 @@ public class InsertActivity extends AppCompatActivity {
             }
         });
     }
-
     public void databaseInit(){
         Realm.init(this);
         mRealm=Realm.getDefaultInstance();
         RealmResults<PersonRealmDb> result=mRealm.where(PersonRealmDb.class).findAll();
-        str_id_increment=Integer.toString(result.last().getId()+1);
-        edt_id.setText(str_id_increment);
+        PersonRealmDb custom = mRealm.where(PersonRealmDb.class).findFirst();
+        if (custom != null) {
+            // Exists
+            str_id_increment=Integer.toString(result.last().getId()+1);
+            edt_id.setText(str_id_increment);
+        } else {
+            // Not exist
+            str_id_increment=Integer.toString(1);
+            edt_id.setText(str_id_increment);
+        }
+        Log.e("check",""+custom);
     }
 }

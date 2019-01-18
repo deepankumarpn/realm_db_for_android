@@ -1,5 +1,7 @@
 package dev.spooke.realmdb;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,18 +39,36 @@ public class DeleteActivity extends AppCompatActivity {
         Realm.init(this);
         mRealm=Realm.getDefaultInstance();
 
+
+
         btn_delete_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RealmQuery<PersonRealmDb> query = mRealm.where(PersonRealmDb.class);
-                mRealm.beginTransaction();
-                RealmResults<PersonRealmDb> skuItems1 = query.findAll();
 
-                if (skuItems1 != null) {
-                    skuItems1.deleteAllFromRealm();
-                    mRealm.commitTransaction();
-                    mRealm.refresh();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(DeleteActivity.this);
+                builder.setTitle("Are you sure want to Delete DB?");
+                // Add the buttons
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                        RealmQuery<PersonRealmDb> query = mRealm.where(PersonRealmDb.class);
+                        mRealm.beginTransaction();
+                        RealmResults<PersonRealmDb> skuItems1 = query.findAll();
+                        if (skuItems1 != null) {
+                            skuItems1.deleteAllFromRealm();
+                            mRealm.commitTransaction();
+                            mRealm.refresh();
+                        }
+                    }
+                });
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
 
